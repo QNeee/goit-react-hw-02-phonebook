@@ -3,6 +3,7 @@ import Form from "./Form/Form";
 import { nanoid } from 'nanoid'
 import { ContactList } from "./ContactList/ContactList";
 import { Filter } from "./Filter/Filter";
+import { Container, Title } from "./App.styled";
 class App extends Component {
   state = {
     contacts: [
@@ -20,7 +21,7 @@ class App extends Component {
       number: data.number,
       id: nanoid()
     }
-    const findContact = contacts.find(item => item.name.toLocaleLowerCase() === data.name.toLocaleLowerCase())
+    const findContact = contacts.find(item => item.name.toLowerCase() === data.name.toLowerCase())
     if (!findContact) {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, newContact]
@@ -47,13 +48,13 @@ class App extends Component {
   }
   render() {
     const { filter } = this.state;
-    return (<div>
-      <h1>Phonebook</h1>
+    return (<Container>
+      <Title>Phonebook</Title>
       <Form onSubmit={this.formSubmitHander} />
-      <h2>Contacts</h2>
+      <Title>Contacts</Title>
       <Filter value={filter} change={this.change} />
       <ContactList options={this.getFilteredContacts()} deleteContact={this.onDelete} />
-    </div>)
+    </Container >)
 
   }
 }
