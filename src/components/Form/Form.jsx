@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import { nanoid } from 'nanoid'
 import { ContainerForm, Label, Button } from "./Form.styled";
 class Form extends Component {
@@ -12,12 +13,14 @@ class Form extends Component {
     inputHandler = (e) => {
         this.setState({
             [e.currentTarget.name]: e.currentTarget.value
-
         })
     }
     onSubmit = (e) => {
         e.preventDefault();
         this.props.onSubmit(this.state);
+        this.setState({
+            name: '', number: ''
+        })
     }
 
     render() {
@@ -49,4 +52,7 @@ class Form extends Component {
         </ContainerForm>);
     }
 }
+Form.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+};
 export default Form;

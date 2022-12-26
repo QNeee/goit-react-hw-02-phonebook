@@ -14,7 +14,7 @@ class App extends Component {
     ],
     filter: '',
   }
-  formSubmitHander = (data) => {
+  formSubmitHandler = (data) => {
     const { contacts } = this.state;
     const newContact = {
       name: data.name,
@@ -37,7 +37,7 @@ class App extends Component {
       contacts: prevState.contacts.filter((item) => item.id !== id)
     }))
   }
-  change = (value) => {
+  onChangeFilter = (value) => {
     this.setState({
       filter: value
     })
@@ -50,10 +50,10 @@ class App extends Component {
     const { filter } = this.state;
     return (<Container>
       <Title>Phonebook</Title>
-      <Form onSubmit={this.formSubmitHander} />
+      <Form onSubmit={this.formSubmitHandler} />
       <Title>Contacts</Title>
-      <Filter value={filter} change={this.change} />
-      <ContactList options={this.getFilteredContacts()} deleteContact={this.onDelete} />
+      <Filter value={filter} change={this.onChangeFilter} />
+      <ContactList contacts={this.getFilteredContacts()} deleteContact={this.onDelete} />
     </Container >)
 
   }
